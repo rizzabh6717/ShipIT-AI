@@ -1,0 +1,1652 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-11T19:58:57+00:00",
+  "mode": "comparison",
+  "mode_used": "deterministic (78% top-1) vs llm (78% top-1)",
+  "llm_fallback_note": "No LLM_API_KEY / LLM_PROVIDER configured \u2014 LLM mode fell back to the deterministic heuristic. Set LLM_PROVIDER=openrouter (or openai) and LLM_API_KEY in backend/.env to benchmark real LLM re-ranking.",
+  "dataset": {
+    "path": "D:\\shipit-adv\\shipit1\\project\\backend\\evals\\data\\matching_eval.json",
+    "version": "1.0.0",
+    "num_cases": 40
+  },
+  "configuration": {
+    "embedding_provider": "deterministic",
+    "embedding_model": "text-embedding-3-small",
+    "embedding_dimensions": 1536,
+    "llm_provider": "heuristic",
+    "llm_model": "meta-llama/llama-3.1-8b-instruct",
+    "top_k": 10,
+    "max_results": 5,
+    "candidate_pool": "isolated-per-case"
+  },
+  "metrics": {
+    "num_cases": 40,
+    "top1_accuracy": 0.775,
+    "top3_accuracy": 1.0,
+    "mrr": 0.8875,
+    "avg_match_score": 0.7165,
+    "expected_retrieved_rate": 1.0,
+    "correct_count": 31
+  },
+  "latency_ms": {
+    "avg_retrieval_ms": 12.33,
+    "avg_ranking_ms": 0.14,
+    "avg_total_ms": 12.47,
+    "avg_candidates": 4.03
+  },
+  "comparison": {
+    "deterministic": {
+      "top1_accuracy": 0.775,
+      "top3_accuracy": 1.0,
+      "mrr": 0.8875,
+      "avg_match_score": 0.7165,
+      "avg_total_ms": 12.47,
+      "num_cases": 40
+    },
+    "llm": {
+      "top1_accuracy": 0.775,
+      "top3_accuracy": 1.0,
+      "mrr": 0.8875,
+      "avg_match_score": 0.7165,
+      "avg_total_ms": 12.31,
+      "num_cases": 40
+    }
+  },
+  "per_case": [
+    {
+      "case_id": "eval-001",
+      "name": "Noida Sector 62 to Vaishali",
+      "expected": "D101",
+      "acceptable": [
+        "D104"
+      ],
+      "retrieved_count": 5,
+      "predicted": [
+        {
+          "driver_id": "D101",
+          "score": 0.771471610566102
+        },
+        {
+          "driver_id": "D104",
+          "score": 0.7554549973306537
+        },
+        {
+          "driver_id": "D102",
+          "score": 0.7360076840694363
+        },
+        {
+          "driver_id": "D105",
+          "score": 0.6720125619694431
+        },
+        {
+          "driver_id": "D103",
+          "score": 0.5084312341018593
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 20.09,
+      "ranking_ms": 0.17,
+      "total_ms": 20.26
+    },
+    {
+      "case_id": "eval-002",
+      "name": "Connaught Place to Gurgaon Cyber City",
+      "expected": "D201",
+      "acceptable": [
+        "D204"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D201",
+          "score": 0.6708791198216583
+        },
+        {
+          "driver_id": "D202",
+          "score": 0.6216894380965996
+        },
+        {
+          "driver_id": "D203",
+          "score": 0.6018000712480325
+        },
+        {
+          "driver_id": "D204",
+          "score": 0.5919930839724308
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 15.2,
+      "ranking_ms": 0.12,
+      "total_ms": 15.31
+    },
+    {
+      "case_id": "eval-003",
+      "name": "Greater Noida to Noida Sector 18 (reversed route distractor)",
+      "expected": "D301",
+      "acceptable": [
+        "D303"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D302",
+          "score": 0.7815872146347392
+        },
+        {
+          "driver_id": "D301",
+          "score": 0.7727872146720656
+        },
+        {
+          "driver_id": "D303",
+          "score": 0.7464372146147739
+        },
+        {
+          "driver_id": "D304",
+          "score": 0.6963339416848671
+        }
+      ],
+      "top1_correct": false,
+      "expected_in_top3": true,
+      "reciprocal_rank": 0.5,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 13.17,
+      "ranking_ms": 0.12,
+      "total_ms": 13.29
+    },
+    {
+      "case_id": "eval-004",
+      "name": "Faridabad to Lajpat Nagar",
+      "expected": "D401",
+      "acceptable": [
+        "D403"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D401",
+          "score": 0.6801540462939015
+        },
+        {
+          "driver_id": "D402",
+          "score": 0.6193895688468742
+        },
+        {
+          "driver_id": "D404",
+          "score": 0.6153895688312492
+        },
+        {
+          "driver_id": "D403",
+          "score": 0.592754046255707
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 13.22,
+      "ranking_ms": 0.12,
+      "total_ms": 13.34
+    },
+    {
+      "case_id": "eval-005",
+      "name": "Gurgaon Sector 14 to Dwarka",
+      "expected": "D501",
+      "acceptable": [
+        "D503"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D502",
+          "score": 0.7389836485584277
+        },
+        {
+          "driver_id": "D501",
+          "score": 0.7309836485983582
+        },
+        {
+          "driver_id": "D503",
+          "score": 0.6532836484915873
+        },
+        {
+          "driver_id": "D504",
+          "score": 0.5777476553069326
+        }
+      ],
+      "top1_correct": false,
+      "expected_in_top3": true,
+      "reciprocal_rank": 0.5,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.93,
+      "ranking_ms": 0.23,
+      "total_ms": 13.17
+    },
+    {
+      "case_id": "eval-006",
+      "name": "Karol Bagh to Rohini",
+      "expected": "D601",
+      "acceptable": [
+        "D603"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D601",
+          "score": 0.6802165129435477
+        },
+        {
+          "driver_id": "D602",
+          "score": 0.6469140033417644
+        },
+        {
+          "driver_id": "D603",
+          "score": 0.6205165129062212
+        },
+        {
+          "driver_id": "D604",
+          "score": 0.5863004832146975
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 13.54,
+      "ranking_ms": 0.12,
+      "total_ms": 13.66
+    },
+    {
+      "case_id": "eval-007",
+      "name": "Noida Sector 137 to Faridabad",
+      "expected": "D701",
+      "acceptable": [
+        "D703"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D701",
+          "score": 0.7473909011437023
+        },
+        {
+          "driver_id": "D702",
+          "score": 0.7161389816354307
+        },
+        {
+          "driver_id": "D704",
+          "score": 0.6575899477660344
+        },
+        {
+          "driver_id": "D703",
+          "score": 0.6529909011046396
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 13.23,
+      "ranking_ms": 0.12,
+      "total_ms": 13.35
+    },
+    {
+      "case_id": "eval-008",
+      "name": "Ghaziabad to Connaught Place",
+      "expected": "D801",
+      "acceptable": [
+        "D803"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D801",
+          "score": 0.7023983916777586
+        },
+        {
+          "driver_id": "D802",
+          "score": 0.6550919510600014
+        },
+        {
+          "driver_id": "D804",
+          "score": 0.6531781027091493
+        },
+        {
+          "driver_id": "D803",
+          "score": 0.6261483916404322
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.76,
+      "ranking_ms": 0.12,
+      "total_ms": 11.88
+    },
+    {
+      "case_id": "eval-009",
+      "name": "Dwarka to Gurgaon MG Road",
+      "expected": "D901",
+      "acceptable": [
+        "D903"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D902",
+          "score": 0.6750007811418118
+        },
+        {
+          "driver_id": "D901",
+          "score": 0.6670007811791382
+        },
+        {
+          "driver_id": "D904",
+          "score": 0.5888316306191411
+        },
+        {
+          "driver_id": "D903",
+          "score": 0.5782507811209784
+        }
+      ],
+      "top1_correct": false,
+      "expected_in_top3": true,
+      "reciprocal_rank": 0.5,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.97,
+      "ranking_ms": 0.12,
+      "total_ms": 12.09
+    },
+    {
+      "case_id": "eval-010",
+      "name": "Saket to Noida Sector 62 (near-tie corridor)",
+      "expected": "D1001",
+      "acceptable": [
+        "D1002"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D1001",
+          "score": 0.6677921819119164
+        },
+        {
+          "driver_id": "D1004",
+          "score": 0.5954232592027054
+        },
+        {
+          "driver_id": "D1002",
+          "score": 0.5886211124778808
+        },
+        {
+          "driver_id": "D1003",
+          "score": 0.5644921818737219
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.15,
+      "ranking_ms": 0.12,
+      "total_ms": 12.27
+    },
+    {
+      "case_id": "eval-011",
+      "name": "Delhi to Agra (long haul)",
+      "expected": "D1101",
+      "acceptable": [
+        "D1104"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D1101",
+          "score": 0.7901023582938427
+        },
+        {
+          "driver_id": "D1104",
+          "score": 0.7781023582547801
+        },
+        {
+          "driver_id": "D1103",
+          "score": 0.7431824094503747
+        },
+        {
+          "driver_id": "D1102",
+          "score": 0.7404104460870742
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.33,
+      "ranking_ms": 0.12,
+      "total_ms": 12.45
+    },
+    {
+      "case_id": "eval-012",
+      "name": "Delhi to Chandigarh (long haul)",
+      "expected": "D1201",
+      "acceptable": [
+        "D1204"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D1204",
+          "score": 0.7280811297134856
+        },
+        {
+          "driver_id": "D1201",
+          "score": 0.7232811298515064
+        },
+        {
+          "driver_id": "D1202",
+          "score": 0.6978894922471938
+        },
+        {
+          "driver_id": "D1203",
+          "score": 0.6764978547592008
+        }
+      ],
+      "top1_correct": false,
+      "expected_in_top3": true,
+      "reciprocal_rank": 0.5,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.27,
+      "ranking_ms": 0.35,
+      "total_ms": 11.62
+    },
+    {
+      "case_id": "eval-013",
+      "name": "Delhi to Jaipur (long haul)",
+      "expected": "D1301",
+      "acceptable": [
+        "D1303"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D1301",
+          "score": 0.7754064719006554
+        },
+        {
+          "driver_id": "D1304",
+          "score": 0.763406471862461
+        },
+        {
+          "driver_id": "D1303",
+          "score": 0.761960090372587
+        },
+        {
+          "driver_id": "D1302",
+          "score": 0.7235947866102722
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.03,
+      "ranking_ms": 0.12,
+      "total_ms": 12.15
+    },
+    {
+      "case_id": "eval-014",
+      "name": "Delhi to Dehradun (long haul)",
+      "expected": "D1401",
+      "acceptable": [
+        "D1403"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D1401",
+          "score": 0.7213723269677982
+        },
+        {
+          "driver_id": "D1403",
+          "score": 0.7173723269148468
+        },
+        {
+          "driver_id": "D1402",
+          "score": 0.6929599035386763
+        },
+        {
+          "driver_id": "D1404",
+          "score": 0.6849599035013499
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 10.97,
+      "ranking_ms": 0.28,
+      "total_ms": 11.25
+    },
+    {
+      "case_id": "eval-015",
+      "name": "Noida to Delhi Airport (IGI)",
+      "expected": "D1501",
+      "acceptable": [
+        "D1504"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D1501",
+          "score": 0.6907403428617176
+        },
+        {
+          "driver_id": "D1502",
+          "score": 0.6547852749676586
+        },
+        {
+          "driver_id": "D1503",
+          "score": 0.6251954738799516
+        },
+        {
+          "driver_id": "D1504",
+          "score": 0.5803403428235231
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.41,
+      "ranking_ms": 0.12,
+      "total_ms": 12.53
+    },
+    {
+      "case_id": "eval-016",
+      "name": "Gurgaon to Noida Sector 18",
+      "expected": "D1601",
+      "acceptable": [
+        "D1603"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D1601",
+          "score": 0.7512846505362896
+        },
+        {
+          "driver_id": "D1602",
+          "score": 0.6973232672372561
+        },
+        {
+          "driver_id": "D1603",
+          "score": 0.6886846504998313
+        },
+        {
+          "driver_id": "D1604",
+          "score": 0.6262171137807849
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.57,
+      "ranking_ms": 0.11,
+      "total_ms": 11.69
+    },
+    {
+      "case_id": "eval-017",
+      "name": "Indirapuram to Noida Sector 18",
+      "expected": "D1701",
+      "acceptable": [
+        "D1703",
+        "D1704"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D1701",
+          "score": 0.7244650893595734
+        },
+        {
+          "driver_id": "D1703",
+          "score": 0.6877873400320238
+        },
+        {
+          "driver_id": "D1702",
+          "score": 0.6856551850330265
+        },
+        {
+          "driver_id": "D1704",
+          "score": 0.6647150893231151
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.92,
+      "ranking_ms": 0.11,
+      "total_ms": 12.04
+    },
+    {
+      "case_id": "eval-018",
+      "name": "Vaishali to Saket",
+      "expected": "D1801",
+      "acceptable": [
+        "D1804"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D1801",
+          "score": 0.6768224304737656
+        },
+        {
+          "driver_id": "D1802",
+          "score": 0.640807184069157
+        },
+        {
+          "driver_id": "D1803",
+          "score": 0.63044537532146
+        },
+        {
+          "driver_id": "D1804",
+          "score": 0.5732224304364392
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.51,
+      "ranking_ms": 0.12,
+      "total_ms": 11.63
+    },
+    {
+      "case_id": "eval-019",
+      "name": "Faridabad to Gurgaon",
+      "expected": "D1901",
+      "acceptable": [
+        "D1903"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D1901",
+          "score": 0.6793526344696529
+        },
+        {
+          "driver_id": "D1904",
+          "score": 0.6505644794390255
+        },
+        {
+          "driver_id": "D1903",
+          "score": 0.6308526344314584
+        },
+        {
+          "driver_id": "D1902",
+          "score": 0.6279226464055204
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.91,
+      "ranking_ms": 0.12,
+      "total_ms": 12.03
+    },
+    {
+      "case_id": "eval-020",
+      "name": "Rohini to Janakpuri",
+      "expected": "D2001",
+      "acceptable": [
+        "D2003"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D2001",
+          "score": 0.685689662061237
+        },
+        {
+          "driver_id": "D2002",
+          "score": 0.6611905047531497
+        },
+        {
+          "driver_id": "D2003",
+          "score": 0.6394396620230425
+        },
+        {
+          "driver_id": "D2004",
+          "score": 0.6349387263733431
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.0,
+      "ranking_ms": 0.12,
+      "total_ms": 12.11
+    },
+    {
+      "case_id": "eval-021",
+      "name": "Lajpat Nagar to Noida Sector 62 (hard tie)",
+      "expected": "D2101",
+      "acceptable": [
+        "D2102"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D2102",
+          "score": 0.6948114028769383
+        },
+        {
+          "driver_id": "D2101",
+          "score": 0.6820114029151327
+        },
+        {
+          "driver_id": "D2103",
+          "score": 0.6180026336175021
+        },
+        {
+          "driver_id": "D2104",
+          "score": 0.5924614028578411
+        }
+      ],
+      "top1_correct": false,
+      "expected_in_top3": true,
+      "reciprocal_rank": 0.5,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.94,
+      "ranking_ms": 0.14,
+      "total_ms": 12.09
+    },
+    {
+      "case_id": "eval-022",
+      "name": "Noida Sector 62 to Connaught Place (hard reverse)",
+      "expected": "D2201",
+      "acceptable": [
+        "D2202"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D2204",
+          "score": 0.685920898429191
+        },
+        {
+          "driver_id": "D2201",
+          "score": 0.6787208984856146
+        },
+        {
+          "driver_id": "D2203",
+          "score": 0.6223668609149174
+        },
+        {
+          "driver_id": "D2202",
+          "score": 0.5918208984474201
+        }
+      ],
+      "top1_correct": false,
+      "expected_in_top3": true,
+      "reciprocal_rank": 0.5,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.42,
+      "ranking_ms": 0.12,
+      "total_ms": 12.54
+    },
+    {
+      "case_id": "eval-023",
+      "name": "Connaught Place to Faridabad (900 kg truck)",
+      "expected": "D2301",
+      "acceptable": [
+        "D2304"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D2301",
+          "score": 0.7208522536706377
+        },
+        {
+          "driver_id": "D2303",
+          "score": 0.6722605243564267
+        },
+        {
+          "driver_id": "D2302",
+          "score": 0.617318920300846
+        },
+        {
+          "driver_id": "D2304",
+          "score": 0.608252253613346
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.46,
+      "ranking_ms": 0.12,
+      "total_ms": 11.57
+    },
+    {
+      "case_id": "eval-024",
+      "name": "Connaught Place to Gurgaon (urgent 4h)",
+      "expected": "D2401",
+      "acceptable": [
+        "D2402"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D2402",
+          "score": 0.6885379274969831
+        },
+        {
+          "driver_id": "D2401",
+          "score": 0.6853379275351775
+        },
+        {
+          "driver_id": "D2403",
+          "score": 0.6653379274787539
+        },
+        {
+          "driver_id": "D2404",
+          "score": 0.5970340328837183
+        }
+      ],
+      "top1_correct": false,
+      "expected_in_top3": true,
+      "reciprocal_rank": 0.5,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.26,
+      "ranking_ms": 0.12,
+      "total_ms": 12.38
+    },
+    {
+      "case_id": "eval-025",
+      "name": "Ghaziabad to Greater Noida",
+      "expected": "D2501",
+      "acceptable": [
+        "D2503"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D2504",
+          "score": 0.7452231270868707
+        },
+        {
+          "driver_id": "D2501",
+          "score": 0.7332231271424262
+        },
+        {
+          "driver_id": "D2502",
+          "score": 0.7056048745668299
+        },
+        {
+          "driver_id": "D2503",
+          "score": 0.6868231271050999
+        }
+      ],
+      "top1_correct": false,
+      "expected_in_top3": true,
+      "reciprocal_rank": 0.5,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.58,
+      "ranking_ms": 0.11,
+      "total_ms": 11.69
+    },
+    {
+      "case_id": "eval-026",
+      "name": "Greater Noida to Faridabad",
+      "expected": "D2601",
+      "acceptable": [
+        "D2603"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D2601",
+          "score": 0.7170996173489245
+        },
+        {
+          "driver_id": "D2602",
+          "score": 0.6785357686145069
+        },
+        {
+          "driver_id": "D2604",
+          "score": 0.6722756197573887
+        },
+        {
+          "driver_id": "D2603",
+          "score": 0.6509496173115981
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 13.81,
+      "ranking_ms": 0.11,
+      "total_ms": 13.92
+    },
+    {
+      "case_id": "eval-027",
+      "name": "Connaught Place to Noida Sector 137",
+      "expected": "D2701",
+      "acceptable": [
+        "D2704"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D2701",
+          "score": 0.724191699416126
+        },
+        {
+          "driver_id": "D2702",
+          "score": 0.7151997648819002
+        },
+        {
+          "driver_id": "D2703",
+          "score": 0.6621075144164278
+        },
+        {
+          "driver_id": "D2704",
+          "score": 0.6398416993787996
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.52,
+      "ranking_ms": 0.12,
+      "total_ms": 11.64
+    },
+    {
+      "case_id": "eval-028",
+      "name": "Gurgaon to Faridabad",
+      "expected": "D2801",
+      "acceptable": [
+        "D2803"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D2801",
+          "score": 0.6779018026892709
+        },
+        {
+          "driver_id": "D2804",
+          "score": 0.6414703789210705
+        },
+        {
+          "driver_id": "D2803",
+          "score": 0.6369018026519445
+        },
+        {
+          "driver_id": "D2802",
+          "score": 0.6216718146286107
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.96,
+      "ranking_ms": 0.11,
+      "total_ms": 12.07
+    },
+    {
+      "case_id": "eval-029",
+      "name": "Saket to Gurgaon MG Road (hard near-tie)",
+      "expected": "D2901",
+      "acceptable": [
+        "D2902",
+        "D2904"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D2902",
+          "score": 0.6812138124315711
+        },
+        {
+          "driver_id": "D2901",
+          "score": 0.6692138124697656
+        },
+        {
+          "driver_id": "D2903",
+          "score": 0.600747762991873
+        },
+        {
+          "driver_id": "D2904",
+          "score": 0.5685638124124739
+        }
+      ],
+      "top1_correct": false,
+      "expected_in_top3": true,
+      "reciprocal_rank": 0.5,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.65,
+      "ranking_ms": 0.12,
+      "total_ms": 11.77
+    },
+    {
+      "case_id": "eval-030",
+      "name": "Dwarka to Karol Bagh",
+      "expected": "D3001",
+      "acceptable": [
+        "D3003"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D3001",
+          "score": 0.7122226682766538
+        },
+        {
+          "driver_id": "D3002",
+          "score": 0.6813242189735638
+        },
+        {
+          "driver_id": "D3003",
+          "score": 0.6761726682393274
+        },
+        {
+          "driver_id": "D3004",
+          "score": 0.6634387378259939
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.67,
+      "ranking_ms": 0.12,
+      "total_ms": 11.79
+    },
+    {
+      "case_id": "eval-031",
+      "name": "Noida Sector 18 to Ghaziabad (light bicycle parcel)",
+      "expected": "D3101",
+      "acceptable": [
+        "D3102"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D3101",
+          "score": 0.6927409011817016
+        },
+        {
+          "driver_id": "D3102",
+          "score": 0.6828808441135679
+        },
+        {
+          "driver_id": "D3104",
+          "score": 0.6505409011443752
+        },
+        {
+          "driver_id": "D3103",
+          "score": 0.6366404330539076
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.43,
+      "ranking_ms": 0.12,
+      "total_ms": 12.55
+    },
+    {
+      "case_id": "eval-032",
+      "name": "Janakpuri to Rohini (intra-city)",
+      "expected": "D3201",
+      "acceptable": [
+        "D3203"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D3201",
+          "score": 0.6740664899342029
+        },
+        {
+          "driver_id": "D3202",
+          "score": 0.6436132741270254
+        },
+        {
+          "driver_id": "D3204",
+          "score": 0.6364042432213614
+        },
+        {
+          "driver_id": "D3203",
+          "score": 0.6208164898968764
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.9,
+      "ranking_ms": 0.11,
+      "total_ms": 12.02
+    },
+    {
+      "case_id": "eval-033",
+      "name": "Agra to Delhi (long-haul reverse, hard)",
+      "expected": "D3301",
+      "acceptable": [
+        "D3302"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D3301",
+          "score": 0.7598884667018619
+        },
+        {
+          "driver_id": "D3304",
+          "score": 0.7558884666410981
+        },
+        {
+          "driver_id": "D3302",
+          "score": 0.7047384666610633
+        },
+        {
+          "driver_id": "D3303",
+          "score": 0.7046910725515956
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.8,
+      "ranking_ms": 0.15,
+      "total_ms": 11.95
+    },
+    {
+      "case_id": "eval-034",
+      "name": "Chandigarh to Delhi (long haul)",
+      "expected": "D3401",
+      "acceptable": [
+        "D3404"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D3401",
+          "score": 0.7452279510885236
+        },
+        {
+          "driver_id": "D3404",
+          "score": 0.7420279510511972
+        },
+        {
+          "driver_id": "D3402",
+          "score": 0.6838534432108422
+        },
+        {
+          "driver_id": "D3403",
+          "score": 0.6715906094989007
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.28,
+      "ranking_ms": 0.11,
+      "total_ms": 11.4
+    },
+    {
+      "case_id": "eval-035",
+      "name": "Delhi to Lucknow (long haul)",
+      "expected": "D3501",
+      "acceptable": [
+        "D3504"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D3501",
+          "score": 0.8072327335615599
+        },
+        {
+          "driver_id": "D3503",
+          "score": 0.7842513233573036
+        },
+        {
+          "driver_id": "D3502",
+          "score": 0.7802513233573036
+        },
+        {
+          "driver_id": "D3504",
+          "score": 0.7044827335615599
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.41,
+      "ranking_ms": 0.12,
+      "total_ms": 12.53
+    },
+    {
+      "case_id": "eval-036",
+      "name": "Lucknow to Kanpur (regional)",
+      "expected": "D3601",
+      "acceptable": [
+        "D3602"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D3601",
+          "score": 0.7295303207547934
+        },
+        {
+          "driver_id": "D3603",
+          "score": 0.7083191000044903
+        },
+        {
+          "driver_id": "D3604",
+          "score": 0.7035190999602196
+        },
+        {
+          "driver_id": "D3602",
+          "score": 0.7020803206896893
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.41,
+      "ranking_ms": 0.26,
+      "total_ms": 11.67
+    },
+    {
+      "case_id": "eval-037",
+      "name": "Jaipur to Delhi (long haul)",
+      "expected": "D3701",
+      "acceptable": [
+        "D3702"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D3701",
+          "score": 0.7492304070857881
+        },
+        {
+          "driver_id": "D3704",
+          "score": 0.7452304070284964
+        },
+        {
+          "driver_id": "D3703",
+          "score": 0.6915799823566248
+        },
+        {
+          "driver_id": "D3702",
+          "score": 0.6705304070475936
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.45,
+      "ranking_ms": 0.12,
+      "total_ms": 11.57
+    },
+    {
+      "case_id": "eval-038",
+      "name": "Noida Sector 62 to Noida Sector 137 (intra-Noida)",
+      "expected": "D3801",
+      "acceptable": [
+        "D3802",
+        "D3803"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D3801",
+          "score": 0.7163197331077346
+        },
+        {
+          "driver_id": "D3803",
+          "score": 0.69811973306954
+        },
+        {
+          "driver_id": "D3802",
+          "score": 0.6956029572541255
+        },
+        {
+          "driver_id": "D3804",
+          "score": 0.6311377990277439
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.65,
+      "ranking_ms": 0.12,
+      "total_ms": 11.77
+    },
+    {
+      "case_id": "eval-039",
+      "name": "Dehradun to Delhi (hard reverse long haul)",
+      "expected": "D3901",
+      "acceptable": [
+        "D3902"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D3901",
+          "score": 0.7026199827993954
+        },
+        {
+          "driver_id": "D3904",
+          "score": 0.6986199827429718
+        },
+        {
+          "driver_id": "D3903",
+          "score": 0.6621557743487189
+        },
+        {
+          "driver_id": "D3902",
+          "score": 0.6281199827620689
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 11.01,
+      "ranking_ms": 0.12,
+      "total_ms": 11.13
+    },
+    {
+      "case_id": "eval-040",
+      "name": "Connaught Place to Ghaziabad",
+      "expected": "D4001",
+      "acceptable": [
+        "D4003"
+      ],
+      "retrieved_count": 4,
+      "predicted": [
+        {
+          "driver_id": "D4001",
+          "score": 0.69501279952243
+        },
+        {
+          "driver_id": "D4002",
+          "score": 0.6817275344271131
+        },
+        {
+          "driver_id": "D4004",
+          "score": 0.6475151479154467
+        },
+        {
+          "driver_id": "D4003",
+          "score": 0.6102627994851036
+        }
+      ],
+      "top1_correct": true,
+      "expected_in_top3": true,
+      "reciprocal_rank": 1.0,
+      "ranked_by": "heuristic",
+      "retrieval_ms": 12.5,
+      "ranking_ms": 0.18,
+      "total_ms": 12.67
+    }
+  ],
+  "successes": [
+    "eval-035 (Delhi to Lucknow (long haul))",
+    "eval-011 (Delhi to Agra (long haul))",
+    "eval-013 (Delhi to Jaipur (long haul))",
+    "eval-001 (Noida Sector 62 to Vaishali)",
+    "eval-033 (Agra to Delhi (long-haul reverse, hard))"
+  ],
+  "failures": [
+    "eval-003 (Greater Noida to Noida Sector 18 (reversed route distractor))",
+    "eval-005 (Gurgaon Sector 14 to Dwarka)",
+    "eval-022 (Noida Sector 62 to Connaught Place (hard reverse))",
+    "eval-024 (Connaught Place to Gurgaon (urgent 4h))",
+    "eval-009 (Dwarka to Gurgaon MG Road)"
+  ],
+  "examples": [
+    {
+      "case_id": "eval-001",
+      "name": "Noida Sector 62 to Vaishali",
+      "parcel": "Noida Sector 62, Uttar Pradesh \u2192 Vaishali, Ghaziabad, Uttar Pradesh",
+      "expected": "D101",
+      "acceptable": [
+        "D104"
+      ],
+      "predicted": [
+        {
+          "rank": 1,
+          "driver_id": "D101",
+          "score": 0.771471610566102
+        },
+        {
+          "rank": 2,
+          "driver_id": "D104",
+          "score": 0.7554549973306537
+        },
+        {
+          "rank": 3,
+          "driver_id": "D102",
+          "score": 0.7360076840694363
+        },
+        {
+          "rank": 4,
+          "driver_id": "D105",
+          "score": 0.6720125619694431
+        },
+        {
+          "rank": 5,
+          "driver_id": "D103",
+          "score": 0.5084312341018593
+        }
+      ],
+      "reasons": [
+        "Route overlap: 58%",
+        "Pickup detour: 0.0 km",
+        "Delivery deadline: 24.0h away",
+        "Vehicle capacity sufficient (5.0kg of 60kg)",
+        "Driver reliability: 4.9/5",
+        "On-time rate: 96%"
+      ],
+      "top1_correct": true
+    },
+    {
+      "case_id": "eval-011",
+      "name": "Delhi to Agra (long haul)",
+      "parcel": "Karol Bagh, New Delhi \u2192 Agra, Uttar Pradesh",
+      "expected": "D1101",
+      "acceptable": [
+        "D1104"
+      ],
+      "predicted": [
+        {
+          "rank": 1,
+          "driver_id": "D1101",
+          "score": 0.7901023582938427
+        },
+        {
+          "rank": 2,
+          "driver_id": "D1104",
+          "score": 0.7781023582547801
+        },
+        {
+          "rank": 3,
+          "driver_id": "D1103",
+          "score": 0.7431824094503747
+        },
+        {
+          "rank": 4,
+          "driver_id": "D1102",
+          "score": 0.7404104460870742
+        }
+      ],
+      "reasons": [
+        "Route overlap: 44%",
+        "Pickup detour: 0.0 km",
+        "Delivery deadline: 48.0h away",
+        "Vehicle capacity sufficient (300.0kg of 1200kg)",
+        "Driver reliability: 4.7/5",
+        "On-time rate: 92%"
+      ],
+      "top1_correct": true
+    },
+    {
+      "case_id": "eval-013",
+      "name": "Delhi to Jaipur (long haul)",
+      "parcel": "Karol Bagh, New Delhi \u2192 Jaipur, Rajasthan",
+      "expected": "D1301",
+      "acceptable": [
+        "D1303"
+      ],
+      "predicted": [
+        {
+          "rank": 1,
+          "driver_id": "D1301",
+          "score": 0.7754064719006554
+        },
+        {
+          "rank": 2,
+          "driver_id": "D1304",
+          "score": 0.763406471862461
+        },
+        {
+          "rank": 3,
+          "driver_id": "D1303",
+          "score": 0.761960090372587
+        },
+        {
+          "rank": 4,
+          "driver_id": "D1302",
+          "score": 0.7235947866102722
+        }
+      ],
+      "reasons": [
+        "Route overlap: 47%",
+        "Pickup detour: 0.0 km",
+        "Delivery deadline: 40.0h away",
+        "Vehicle capacity sufficient (220.0kg of 1200kg)",
+        "Driver reliability: 4.7/5",
+        "On-time rate: 91%"
+      ],
+      "top1_correct": true
+    },
+    {
+      "case_id": "eval-033",
+      "name": "Agra to Delhi (long-haul reverse, hard)",
+      "parcel": "Agra, Uttar Pradesh \u2192 Karol Bagh, New Delhi",
+      "expected": "D3301",
+      "acceptable": [
+        "D3302"
+      ],
+      "predicted": [
+        {
+          "rank": 1,
+          "driver_id": "D3301",
+          "score": 0.7598884667018619
+        },
+        {
+          "rank": 2,
+          "driver_id": "D3304",
+          "score": 0.7558884666410981
+        },
+        {
+          "rank": 3,
+          "driver_id": "D3302",
+          "score": 0.7047384666610633
+        },
+        {
+          "rank": 4,
+          "driver_id": "D3303",
+          "score": 0.7046910725515956
+        }
+      ],
+      "reasons": [
+        "Route overlap: 42%",
+        "Pickup detour: 0.0 km",
+        "Delivery deadline: 40.0h away",
+        "Vehicle capacity sufficient (250.0kg of 1200kg)",
+        "Driver reliability: 4.7/5",
+        "On-time rate: 92%"
+      ],
+      "top1_correct": true
+    },
+    {
+      "case_id": "eval-035",
+      "name": "Delhi to Lucknow (long haul)",
+      "parcel": "Karol Bagh, New Delhi \u2192 Lucknow, Uttar Pradesh",
+      "expected": "D3501",
+      "acceptable": [
+        "D3504"
+      ],
+      "predicted": [
+        {
+          "rank": 1,
+          "driver_id": "D3501",
+          "score": 0.8072327335615599
+        },
+        {
+          "rank": 2,
+          "driver_id": "D3503",
+          "score": 0.7842513233573036
+        },
+        {
+          "rank": 3,
+          "driver_id": "D3502",
+          "score": 0.7802513233573036
+        },
+        {
+          "rank": 4,
+          "driver_id": "D3504",
+          "score": 0.7044827335615599
+        }
+      ],
+      "reasons": [
+        "Route overlap: 49%",
+        "Pickup detour: 0.0 km",
+        "Delivery deadline: 50.0h away",
+        "Vehicle capacity sufficient (500.0kg of 1200kg)",
+        "Driver reliability: 4.7/5",
+        "On-time rate: 92%"
+      ],
+      "top1_correct": true
+    }
+  ],
+  "recommendations": [
+    "Deterministic mode is fully offline, zero-cost, and reproducible \u2014 keep it as the production default for cost-sensitive or air-gapped deployments.",
+    "LLM re-ranking only adds value on the ambiguous / near-tie cases; gate it to the top retrieval results so cost stays bounded (retrieval-first keeps the LLM call small).",
+    "Route embeddings are refreshed on creation only. Periodically re-embed (POST /routes/me/embed) after drivers update their routes.",
+    "The pickup-detour signal currently falls back to token-overlap when GPS is absent. Adding geocoded waypoints should improve the tie-break cases.",
+    "Track match outcomes (accept/reject per ranked driver) in production to build a labeled feedback loop that this offline dataset cannot capture."
+  ]
+}

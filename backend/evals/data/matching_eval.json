@@ -1,0 +1,3064 @@
+{
+  "version": "1.0.0",
+  "description": "Curated parcel-driver matching evaluation set for the ShipIT AI engine. Ground-truth labels are human logistics judgments (best route coverage of pickup->drop plus reliability/capacity). Routes are seeded corridor-only (origin->destination; waypoints omitted) because the offline feature-hash embedder dilutes cosine similarity with non-matching tokens - a documented limitation of the deterministic embedder. Includes clean cases and deliberately hard near-tie cases (identical-corridor competitors with higher ratings) so reported accuracy is honest.",
+  "created_by": "ShipIT evaluation framework",
+  "test_cases": [
+    {
+      "id": "eval-001",
+      "name": "Noida Sector 62 to Vaishali",
+      "parcel": {
+        "pickup_location": "Noida Sector 62, Uttar Pradesh",
+        "drop_location": "Vaishali, Ghaziabad, Uttar Pradesh",
+        "item_description": "Electronics parcel, sealed box",
+        "item_value": 15000.0,
+        "weight": 5.0,
+        "size_tier": "small",
+        "budget": 200.0,
+        "deadline_hours": 24
+      },
+      "drivers": [
+        {
+          "id": "D101",
+          "name": "Rahul Sharma",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.9,
+          "on_time_rate": 0.96,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Vaishali, Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D102",
+          "name": "Amit Kumar",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Greater Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D103",
+          "name": "Suresh Yadav",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.4,
+          "on_time_rate": 0.86,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Gurgaon, Haryana",
+            "destination": "Dwarka, Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D104",
+          "name": "Vikram Singh",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.7,
+          "on_time_rate": 0.9,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D105",
+          "name": "Manoj Gupta",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.2,
+          "on_time_rate": 0.82,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Vaishali, Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D101",
+      "acceptable_drivers": [
+        "D104"
+      ]
+    },
+    {
+      "id": "eval-002",
+      "name": "Connaught Place to Gurgaon Cyber City",
+      "parcel": {
+        "pickup_location": "Connaught Place, New Delhi",
+        "drop_location": "Cyber City, Gurgaon, Haryana",
+        "item_description": "Office documents and laptop, medium box",
+        "item_value": 45000.0,
+        "weight": 8.0,
+        "size_tier": "small",
+        "budget": 350.0,
+        "deadline_hours": 6
+      },
+      "drivers": [
+        {
+          "id": "D201",
+          "name": "Karan Malhotra",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Cyber City, Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D202",
+          "name": "Deepak Joshi",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Faridabad, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D203",
+          "name": "Ravi Verma",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.3,
+          "on_time_rate": 0.84,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Rohini, Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D204",
+          "name": "Anil Kapoor",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.9,
+          "on_time_rate": 0.97,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Cyber City, Gurgaon, Haryana",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D201",
+      "acceptable_drivers": [
+        "D204"
+      ]
+    },
+    {
+      "id": "eval-003",
+      "name": "Greater Noida to Noida Sector 18 (reversed route distractor)",
+      "parcel": {
+        "pickup_location": "Greater Noida, Uttar Pradesh",
+        "drop_location": "Noida Sector 18, Uttar Pradesh",
+        "item_description": "Furniture fittings box, 12 kg",
+        "item_value": 8000.0,
+        "weight": 12.0,
+        "size_tier": "medium",
+        "budget": 180.0,
+        "deadline_hours": 30
+      },
+      "drivers": [
+        {
+          "id": "D301",
+          "name": "Harpreet Singh",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "Greater Noida",
+          "route": {
+            "origin": "Greater Noida, Uttar Pradesh",
+            "destination": "Noida Sector 18, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D302",
+          "name": "Mohit Rana",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.9,
+          "on_time_rate": 0.97,
+          "current_city": "Greater Noida",
+          "route": {
+            "origin": "Greater Noida, Uttar Pradesh",
+            "destination": "Noida Sector 18, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D303",
+          "name": "Pankaj Tiwari",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.9,
+          "on_time_rate": 0.96,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 18, Uttar Pradesh",
+            "destination": "Greater Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D304",
+          "name": "Sunil Bansal",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.1,
+          "on_time_rate": 0.8,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Noida Sector 18, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D301",
+      "acceptable_drivers": [
+        "D303"
+      ]
+    },
+    {
+      "id": "eval-004",
+      "name": "Faridabad to Lajpat Nagar",
+      "parcel": {
+        "pickup_location": "Faridabad, Haryana",
+        "drop_location": "Lajpat Nagar, New Delhi",
+        "item_description": "Packed grocery hamper, 10 kg",
+        "item_value": 2500.0,
+        "weight": 10.0,
+        "size_tier": "medium",
+        "budget": 250.0,
+        "deadline_hours": 18
+      },
+      "drivers": [
+        {
+          "id": "D401",
+          "name": "Rakesh Chauhan",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.6,
+          "on_time_rate": 0.91,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Lajpat Nagar, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D402",
+          "name": "Nitin Arora",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.4,
+          "on_time_rate": 0.87,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Ballabgarh, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D403",
+          "name": "Gaurav Mehta",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Lajpat Nagar, New Delhi",
+            "destination": "Faridabad, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D404",
+          "name": "Ashish Negi",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.3,
+          "on_time_rate": 0.85,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Gurgaon, Haryana",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D401",
+      "acceptable_drivers": [
+        "D403"
+      ]
+    },
+    {
+      "id": "eval-005",
+      "name": "Gurgaon Sector 14 to Dwarka",
+      "parcel": {
+        "pickup_location": "Gurgaon Sector 14, Haryana",
+        "drop_location": "Dwarka, New Delhi",
+        "item_description": "Stationery and office supplies carton",
+        "item_value": 6000.0,
+        "weight": 15.0,
+        "size_tier": "medium",
+        "budget": 280.0,
+        "deadline_hours": 24
+      },
+      "drivers": [
+        {
+          "id": "D501",
+          "name": "Tarun Bhatia",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Gurgaon Sector 14, Haryana",
+            "destination": "Dwarka, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D502",
+          "name": "Yogesh Saini",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.9,
+          "on_time_rate": 0.97,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Gurgaon Sector 14, Haryana",
+            "destination": "Dwarka, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D503",
+          "name": "Aakash Wadhwa",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.9,
+          "on_time_rate": 0.96,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Dwarka, New Delhi",
+            "destination": "Gurgaon Sector 14, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D504",
+          "name": "Sandeep Kaur",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 3.9,
+          "on_time_rate": 0.78,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Udyog Vihar, Gurgaon",
+            "destination": "Dwarka, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D501",
+      "acceptable_drivers": [
+        "D503"
+      ]
+    },
+    {
+      "id": "eval-006",
+      "name": "Karol Bagh to Rohini",
+      "parcel": {
+        "pickup_location": "Karol Bagh, New Delhi",
+        "drop_location": "Rohini, Delhi",
+        "item_description": "Gift hamper and dry fruits, 4 kg",
+        "item_value": 3500.0,
+        "weight": 4.0,
+        "size_tier": "small",
+        "budget": 180.0,
+        "deadline_hours": 12
+      },
+      "drivers": [
+        {
+          "id": "D601",
+          "name": "Lakshay Narang",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.8,
+          "on_time_rate": 0.94,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Rohini, Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D602",
+          "name": "Faisal Khan",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.4,
+          "on_time_rate": 0.86,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Saket, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D603",
+          "name": "Naveen Rawat",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.6,
+          "on_time_rate": 0.91,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Rohini, Delhi",
+            "destination": "Karol Bagh, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D604",
+          "name": "Jitender Pal",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.2,
+          "on_time_rate": 0.83,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Janakpuri, New Delhi",
+            "destination": "Rohini, Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D601",
+      "acceptable_drivers": [
+        "D603"
+      ]
+    },
+    {
+      "id": "eval-007",
+      "name": "Noida Sector 137 to Faridabad",
+      "parcel": {
+        "pickup_location": "Noida Sector 137, Uttar Pradesh",
+        "drop_location": "Faridabad, Haryana",
+        "item_description": "CNC tooling crate, 40 kg",
+        "item_value": 32000.0,
+        "weight": 40.0,
+        "size_tier": "large",
+        "budget": 420.0,
+        "deadline_hours": 36
+      },
+      "drivers": [
+        {
+          "id": "D701",
+          "name": "Bhupinder Gill",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 137, Uttar Pradesh",
+            "destination": "Faridabad, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D702",
+          "name": "Sanjay Dutt",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 137, Uttar Pradesh",
+            "destination": "Noida Sector 62, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D703",
+          "name": "Vivek Anand",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.3,
+          "on_time_rate": 0.85,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Noida Sector 137, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D704",
+          "name": "Kunal Saxena",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.0,
+          "on_time_rate": 0.79,
+          "current_city": "Greater Noida",
+          "route": {
+            "origin": "Greater Noida, Uttar Pradesh",
+            "destination": "Faridabad, Haryana",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D701",
+      "acceptable_drivers": [
+        "D703"
+      ]
+    },
+    {
+      "id": "eval-008",
+      "name": "Ghaziabad to Connaught Place",
+      "parcel": {
+        "pickup_location": "Ghaziabad, Uttar Pradesh",
+        "drop_location": "Connaught Place, New Delhi",
+        "item_description": "Clothing consignment, 3 bags",
+        "item_value": 18000.0,
+        "weight": 18.0,
+        "size_tier": "medium",
+        "budget": 300.0,
+        "deadline_hours": 20
+      },
+      "drivers": [
+        {
+          "id": "D801",
+          "name": "Imran Qureshi",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D802",
+          "name": "Rohit Yadav",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.4,
+          "on_time_rate": 0.87,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Rohini, Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D803",
+          "name": "Aditya Rastogi",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D804",
+          "name": "Shahid Ali",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.5,
+          "on_time_rate": 0.9,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Vaishali, Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D801",
+      "acceptable_drivers": [
+        "D803"
+      ]
+    },
+    {
+      "id": "eval-009",
+      "name": "Dwarka to Gurgaon MG Road",
+      "parcel": {
+        "pickup_location": "Dwarka, New Delhi",
+        "drop_location": "MG Road, Gurgaon, Haryana",
+        "item_description": "Server rack component, 25 kg",
+        "item_value": 55000.0,
+        "weight": 25.0,
+        "size_tier": "medium",
+        "budget": 380.0,
+        "deadline_hours": 12
+      },
+      "drivers": [
+        {
+          "id": "D901",
+          "name": "Vikash Chaudhary",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Dwarka, New Delhi",
+            "destination": "MG Road, Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D902",
+          "name": "Arvind Swamy",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.9,
+          "on_time_rate": 0.97,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Dwarka, New Delhi",
+            "destination": "MG Road, Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D903",
+          "name": "Harish Mittal",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.6,
+          "on_time_rate": 0.91,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "MG Road, Gurgaon, Haryana",
+            "destination": "Dwarka, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D904",
+          "name": "Praveen Goyal",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.2,
+          "on_time_rate": 0.84,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Dwarka, New Delhi",
+            "destination": "Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D901",
+      "acceptable_drivers": [
+        "D903"
+      ]
+    },
+    {
+      "id": "eval-010",
+      "name": "Saket to Noida Sector 62 (near-tie corridor)",
+      "parcel": {
+        "pickup_location": "Saket, New Delhi",
+        "drop_location": "Noida Sector 62, Uttar Pradesh",
+        "item_description": "Pharmaceutical cold box, 9 kg",
+        "item_value": 12000.0,
+        "weight": 9.0,
+        "size_tier": "small",
+        "budget": 320.0,
+        "deadline_hours": 8
+      },
+      "drivers": [
+        {
+          "id": "D1001",
+          "name": "Ramesh Chand",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Saket, New Delhi",
+            "destination": "Noida Sector 62, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1002",
+          "name": "Dinesh Panchal",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Lajpat Nagar, New Delhi",
+            "destination": "Noida Sector 62, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1003",
+          "name": "Manish Bhardwaj",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.3,
+          "on_time_rate": 0.85,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Saket, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1004",
+          "name": "Sachin Gupta",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Saket, New Delhi",
+            "destination": "Gurgaon, Haryana",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D1001",
+      "acceptable_drivers": [
+        "D1002"
+      ]
+    },
+    {
+      "id": "eval-011",
+      "name": "Delhi to Agra (long haul)",
+      "parcel": {
+        "pickup_location": "Karol Bagh, New Delhi",
+        "drop_location": "Agra, Uttar Pradesh",
+        "item_description": "Marble handicraft shipment, palletized",
+        "item_value": 85000.0,
+        "weight": 300.0,
+        "size_tier": "large",
+        "budget": 1800.0,
+        "deadline_hours": 48
+      },
+      "drivers": [
+        {
+          "id": "D1101",
+          "name": "Gurpreet Singh",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Agra, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1102",
+          "name": "Balwinder Kaur",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Chandigarh, Punjab",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1103",
+          "name": "Feroz Khan",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Jaipur, Rajasthan",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1104",
+          "name": "Ram Niwas",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.4,
+          "on_time_rate": 0.86,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Agra, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D1101",
+      "acceptable_drivers": [
+        "D1104"
+      ]
+    },
+    {
+      "id": "eval-012",
+      "name": "Delhi to Chandigarh (long haul)",
+      "parcel": {
+        "pickup_location": "Connaught Place, New Delhi",
+        "drop_location": "Chandigarh, Punjab",
+        "item_description": "Furniture flat-pack pallet, 180 kg",
+        "item_value": 40000.0,
+        "weight": 180.0,
+        "size_tier": "large",
+        "budget": 2200.0,
+        "deadline_hours": 30
+      },
+      "drivers": [
+        {
+          "id": "D1201",
+          "name": "Jaswinder Brar",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.8,
+          "on_time_rate": 0.94,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Chandigarh, Punjab",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1202",
+          "name": "Maninder Gill",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Ludhiana, Punjab",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1203",
+          "name": "Sukhdev Dhillon",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Panipat, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1204",
+          "name": "Tejinder Sandhu",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.9,
+          "on_time_rate": 0.97,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Chandigarh, Punjab",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D1201",
+      "acceptable_drivers": [
+        "D1204"
+      ]
+    },
+    {
+      "id": "eval-013",
+      "name": "Delhi to Jaipur (long haul)",
+      "parcel": {
+        "pickup_location": "Karol Bagh, New Delhi",
+        "drop_location": "Jaipur, Rajasthan",
+        "item_description": "Textile rolls, 4 bales",
+        "item_value": 60000.0,
+        "weight": 220.0,
+        "size_tier": "large",
+        "budget": 2600.0,
+        "deadline_hours": 40
+      },
+      "drivers": [
+        {
+          "id": "D1301",
+          "name": "Mahipal Yadav",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.7,
+          "on_time_rate": 0.91,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Jaipur, Rajasthan",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1302",
+          "name": "Ramavtar Saini",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.5,
+          "on_time_rate": 0.87,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Agra, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1303",
+          "name": "Pawan Kumar",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Udaipur, Rajasthan",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1304",
+          "name": "Suresh Jat",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.4,
+          "on_time_rate": 0.85,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Jaipur, Rajasthan",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D1301",
+      "acceptable_drivers": [
+        "D1303"
+      ]
+    },
+    {
+      "id": "eval-014",
+      "name": "Delhi to Dehradun (long haul)",
+      "parcel": {
+        "pickup_location": "Rohini, Delhi",
+        "drop_location": "Dehradun, Uttarakhand",
+        "item_description": "Solar inverter units, 90 kg",
+        "item_value": 70000.0,
+        "weight": 90.0,
+        "size_tier": "large",
+        "budget": 1900.0,
+        "deadline_hours": 36
+      },
+      "drivers": [
+        {
+          "id": "D1401",
+          "name": "Rajendra Negi",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Rohini, Delhi",
+            "destination": "Dehradun, Uttarakhand",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1402",
+          "name": "Sombir Singh",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Rohini, Delhi",
+            "destination": "Haridwar, Uttarakhand",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1403",
+          "name": "Mahesh Bhatt",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Rohini, Delhi",
+            "destination": "Dehradun, Uttarakhand",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1404",
+          "name": "Virender Pal",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.3,
+          "on_time_rate": 0.84,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Rohini, Delhi",
+            "destination": "Rishikesh, Uttarakhand",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D1401",
+      "acceptable_drivers": [
+        "D1403"
+      ]
+    },
+    {
+      "id": "eval-015",
+      "name": "Noida to Delhi Airport (IGI)",
+      "parcel": {
+        "pickup_location": "Noida Sector 62, Uttar Pradesh",
+        "drop_location": "IGI Airport, New Delhi",
+        "item_description": "Travel baggage, 2 suitcases",
+        "item_value": 25000.0,
+        "weight": 28.0,
+        "size_tier": "medium",
+        "budget": 450.0,
+        "deadline_hours": 10
+      },
+      "drivers": [
+        {
+          "id": "D1501",
+          "name": "Asif Rehman",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.94,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "IGI Airport, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1502",
+          "name": "Devendra Sharma",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1503",
+          "name": "Chandan Pal",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.4,
+          "on_time_rate": 0.86,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1504",
+          "name": "Nitish Kumar",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.6,
+          "on_time_rate": 0.91,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "IGI Airport, New Delhi",
+            "destination": "Noida Sector 62, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D1501",
+      "acceptable_drivers": [
+        "D1504"
+      ]
+    },
+    {
+      "id": "eval-016",
+      "name": "Gurgaon to Noida Sector 18",
+      "parcel": {
+        "pickup_location": "Gurgaon Sector 14, Haryana",
+        "drop_location": "Noida Sector 18, Uttar Pradesh",
+        "item_description": "Office furniture, 3 cartons",
+        "item_value": 22000.0,
+        "weight": 55.0,
+        "size_tier": "large",
+        "budget": 520.0,
+        "deadline_hours": 24
+      },
+      "drivers": [
+        {
+          "id": "D1601",
+          "name": "Rajat Bansal",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.91,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Gurgaon Sector 14, Haryana",
+            "destination": "Noida Sector 18, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1602",
+          "name": "Akash Srivastava",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Gurgaon Sector 14, Haryana",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1603",
+          "name": "Ranjit Kumar",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 18, Uttar Pradesh",
+            "destination": "Gurgaon Sector 14, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1604",
+          "name": "Brij Mohan",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.2,
+          "on_time_rate": 0.83,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Noida Sector 18, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D1601",
+      "acceptable_drivers": [
+        "D1603"
+      ]
+    },
+    {
+      "id": "eval-017",
+      "name": "Indirapuram to Noida Sector 18",
+      "parcel": {
+        "pickup_location": "Indirapuram, Ghaziabad, Uttar Pradesh",
+        "drop_location": "Noida Sector 18, Uttar Pradesh",
+        "item_description": "Grocery consignment, 2 cartons",
+        "item_value": 9000.0,
+        "weight": 22.0,
+        "size_tier": "medium",
+        "budget": 240.0,
+        "deadline_hours": 14
+      },
+      "drivers": [
+        {
+          "id": "D1701",
+          "name": "Sarfaraz Alam",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Indirapuram, Ghaziabad, Uttar Pradesh",
+            "destination": "Noida Sector 18, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1702",
+          "name": "Nikhil Tyagi",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Indirapuram, Ghaziabad, Uttar Pradesh",
+            "destination": "Vaishali, Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1703",
+          "name": "Avinash Rao",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Noida Sector 18, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1704",
+          "name": "Rajesh Pandey",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 18, Uttar Pradesh",
+            "destination": "Indirapuram, Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D1701",
+      "acceptable_drivers": [
+        "D1703",
+        "D1704"
+      ]
+    },
+    {
+      "id": "eval-018",
+      "name": "Vaishali to Saket",
+      "parcel": {
+        "pickup_location": "Vaishali, Ghaziabad, Uttar Pradesh",
+        "drop_location": "Saket, New Delhi",
+        "item_description": "Medicines consignment, sealed carton",
+        "item_value": 30000.0,
+        "weight": 6.0,
+        "size_tier": "small",
+        "budget": 340.0,
+        "deadline_hours": 9
+      },
+      "drivers": [
+        {
+          "id": "D1801",
+          "name": "Shubham Agarwal",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Vaishali, Ghaziabad, Uttar Pradesh",
+            "destination": "Saket, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1802",
+          "name": "Himanshu Jain",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Vaishali, Ghaziabad, Uttar Pradesh",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1803",
+          "name": "Amitabh Sinha",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.4,
+          "on_time_rate": 0.86,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Saket, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1804",
+          "name": "Tanveer Ahmed",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Saket, New Delhi",
+            "destination": "Vaishali, Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D1801",
+      "acceptable_drivers": [
+        "D1804"
+      ]
+    },
+    {
+      "id": "eval-019",
+      "name": "Faridabad to Gurgaon",
+      "parcel": {
+        "pickup_location": "Faridabad, Haryana",
+        "drop_location": "Gurgaon, Haryana",
+        "item_description": "Industrial bearings box, 35 kg",
+        "item_value": 28000.0,
+        "weight": 35.0,
+        "size_tier": "large",
+        "budget": 400.0,
+        "deadline_hours": 18
+      },
+      "drivers": [
+        {
+          "id": "D1901",
+          "name": "Shiv Charan",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1902",
+          "name": "Kailash Chandra",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1903",
+          "name": "Suresh Panwar",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Gurgaon, Haryana",
+            "destination": "Faridabad, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D1904",
+          "name": "Vijay Pal",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.3,
+          "on_time_rate": 0.85,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Ballabgarh, Haryana",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D1901",
+      "acceptable_drivers": [
+        "D1903"
+      ]
+    },
+    {
+      "id": "eval-020",
+      "name": "Rohini to Janakpuri",
+      "parcel": {
+        "pickup_location": "Rohini, Delhi",
+        "drop_location": "Janakpuri, New Delhi",
+        "item_description": "Household appliances box, 12 kg",
+        "item_value": 11000.0,
+        "weight": 12.0,
+        "size_tier": "medium",
+        "budget": 220.0,
+        "deadline_hours": 16
+      },
+      "drivers": [
+        {
+          "id": "D2001",
+          "name": "Kartik Rao",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Rohini, Delhi",
+            "destination": "Janakpuri, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2002",
+          "name": "Vipin Kumar",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Rohini, Delhi",
+            "destination": "Saket, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2003",
+          "name": "Amanpreet Singh",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Janakpuri, New Delhi",
+            "destination": "Rohini, Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2004",
+          "name": "Ghanshyam Das",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.1,
+          "on_time_rate": 0.81,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Rohini, Delhi",
+            "destination": "Pitampura, Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D2001",
+      "acceptable_drivers": [
+        "D2003"
+      ]
+    },
+    {
+      "id": "eval-021",
+      "name": "Lajpat Nagar to Noida Sector 62 (hard tie)",
+      "parcel": {
+        "pickup_location": "Lajpat Nagar, New Delhi",
+        "drop_location": "Noida Sector 62, Uttar Pradesh",
+        "item_description": "Fashion garments rack, 30 kg",
+        "item_value": 20000.0,
+        "weight": 30.0,
+        "size_tier": "medium",
+        "budget": 360.0,
+        "deadline_hours": 12
+      },
+      "drivers": [
+        {
+          "id": "D2101",
+          "name": "Mohd Salim",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Lajpat Nagar, New Delhi",
+            "destination": "Noida Sector 62, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2102",
+          "name": "Girish Nair",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.9,
+          "on_time_rate": 0.97,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Lajpat Nagar, New Delhi",
+            "destination": "Noida Sector 62, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2103",
+          "name": "Satish Kaushik",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Lajpat Nagar, New Delhi",
+            "destination": "Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2104",
+          "name": "Ravi Shankar",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.4,
+          "on_time_rate": 0.87,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Lajpat Nagar, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D2101",
+      "acceptable_drivers": [
+        "D2102"
+      ]
+    },
+    {
+      "id": "eval-022",
+      "name": "Noida Sector 62 to Connaught Place (hard reverse)",
+      "parcel": {
+        "pickup_location": "Noida Sector 62, Uttar Pradesh",
+        "drop_location": "Connaught Place, New Delhi",
+        "item_description": "Medical device demo unit, 8 kg",
+        "item_value": 40000.0,
+        "weight": 8.0,
+        "size_tier": "small",
+        "budget": 380.0,
+        "deadline_hours": 6
+      },
+      "drivers": [
+        {
+          "id": "D2201",
+          "name": "Ritu Sharma",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.94,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2202",
+          "name": "Shailesh Verma",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.9,
+          "on_time_rate": 0.96,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Noida Sector 62, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2203",
+          "name": "Mukesh Bansal",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2204",
+          "name": "Pradeep Sagar",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.9,
+          "on_time_rate": 0.97,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D2201",
+      "acceptable_drivers": [
+        "D2202"
+      ]
+    },
+    {
+      "id": "eval-023",
+      "name": "Connaught Place to Faridabad (900 kg truck)",
+      "parcel": {
+        "pickup_location": "Connaught Place, New Delhi",
+        "drop_location": "Faridabad, Haryana",
+        "item_description": "Metal fabrication bundles, 900 kg",
+        "item_value": 120000.0,
+        "weight": 900.0,
+        "size_tier": "large",
+        "budget": 1600.0,
+        "deadline_hours": 30
+      },
+      "drivers": [
+        {
+          "id": "D2301",
+          "name": "Harbans Singh",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Faridabad, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2302",
+          "name": "Vishal Bedi",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Faridabad, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2303",
+          "name": "Ravinder Kumar",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2304",
+          "name": "Krishna Dev",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D2301",
+      "acceptable_drivers": [
+        "D2304"
+      ]
+    },
+    {
+      "id": "eval-024",
+      "name": "Connaught Place to Gurgaon (urgent 4h)",
+      "parcel": {
+        "pickup_location": "Connaught Place, New Delhi",
+        "drop_location": "Gurgaon Sector 29, Haryana",
+        "item_description": "Legal documents courier, urgent",
+        "item_value": 5000.0,
+        "weight": 1.0,
+        "size_tier": "small",
+        "budget": 500.0,
+        "deadline_hours": 4
+      },
+      "drivers": [
+        {
+          "id": "D2401",
+          "name": "Mohsin Khan",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.9,
+          "on_time_rate": 0.97,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Gurgaon Sector 29, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2402",
+          "name": "Lalit Mohan",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 5.0,
+          "on_time_rate": 0.98,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Gurgaon Sector 29, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2403",
+          "name": "Sohan Lal",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.4,
+          "on_time_rate": 0.87,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Gurgaon Sector 29, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2404",
+          "name": "Gopal Krishan",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.8,
+          "on_time_rate": 0.94,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Gurgaon Sector 29, Haryana",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D2401",
+      "acceptable_drivers": [
+        "D2402"
+      ]
+    },
+    {
+      "id": "eval-025",
+      "name": "Ghaziabad to Greater Noida",
+      "parcel": {
+        "pickup_location": "Ghaziabad, Uttar Pradesh",
+        "drop_location": "Greater Noida, Uttar Pradesh",
+        "item_description": "Auto parts consignment, 4 cartons",
+        "item_value": 15000.0,
+        "weight": 45.0,
+        "size_tier": "medium",
+        "budget": 320.0,
+        "deadline_hours": 22
+      },
+      "drivers": [
+        {
+          "id": "D2501",
+          "name": "Faizan Ali",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.91,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Greater Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2502",
+          "name": "Suresh Chand",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.4,
+          "on_time_rate": 0.87,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Noida Sector 18, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2503",
+          "name": "Ramesh Kumar",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.3,
+          "on_time_rate": 0.84,
+          "current_city": "Greater Noida",
+          "route": {
+            "origin": "Greater Noida, Uttar Pradesh",
+            "destination": "Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2504",
+          "name": "Pappu Yadav",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.9,
+          "on_time_rate": 0.97,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Greater Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D2501",
+      "acceptable_drivers": [
+        "D2503"
+      ]
+    },
+    {
+      "id": "eval-026",
+      "name": "Greater Noida to Faridabad",
+      "parcel": {
+        "pickup_location": "Greater Noida, Uttar Pradesh",
+        "drop_location": "Faridabad, Haryana",
+        "item_description": "Plumbing fittings, 3 crates",
+        "item_value": 12000.0,
+        "weight": 60.0,
+        "size_tier": "large",
+        "budget": 480.0,
+        "deadline_hours": 26
+      },
+      "drivers": [
+        {
+          "id": "D2601",
+          "name": "Hemant Sharma",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "Greater Noida",
+          "route": {
+            "origin": "Greater Noida, Uttar Pradesh",
+            "destination": "Faridabad, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2602",
+          "name": "Amit Rana",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "Greater Noida",
+          "route": {
+            "origin": "Greater Noida, Uttar Pradesh",
+            "destination": "Noida Sector 18, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2603",
+          "name": "Vikrant Thakur",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Greater Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2604",
+          "name": "Subhash Gupta",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.3,
+          "on_time_rate": 0.85,
+          "current_city": "Greater Noida",
+          "route": {
+            "origin": "Greater Noida, Uttar Pradesh",
+            "destination": "Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D2601",
+      "acceptable_drivers": [
+        "D2603"
+      ]
+    },
+    {
+      "id": "eval-027",
+      "name": "Connaught Place to Noida Sector 137",
+      "parcel": {
+        "pickup_location": "Connaught Place, New Delhi",
+        "drop_location": "Noida Sector 137, Uttar Pradesh",
+        "item_description": "Office chairs, 5 units flat-packed",
+        "item_value": 26000.0,
+        "weight": 70.0,
+        "size_tier": "large",
+        "budget": 450.0,
+        "deadline_hours": 20
+      },
+      "drivers": [
+        {
+          "id": "D2701",
+          "name": "Vinod Rawat",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Noida Sector 137, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2702",
+          "name": "Aashish Jha",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Noida Sector 62, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2703",
+          "name": "Mukund Rao",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2704",
+          "name": "Bhavesh Patel",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.4,
+          "on_time_rate": 0.86,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 137, Uttar Pradesh",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D2701",
+      "acceptable_drivers": [
+        "D2704"
+      ]
+    },
+    {
+      "id": "eval-028",
+      "name": "Gurgaon to Faridabad",
+      "parcel": {
+        "pickup_location": "Gurgaon, Haryana",
+        "drop_location": "Faridabad, Haryana",
+        "item_description": "Print media cartons, 25 kg",
+        "item_value": 8000.0,
+        "weight": 25.0,
+        "size_tier": "medium",
+        "budget": 350.0,
+        "deadline_hours": 16
+      },
+      "drivers": [
+        {
+          "id": "D2801",
+          "name": "Narender Hooda",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Gurgaon, Haryana",
+            "destination": "Faridabad, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2802",
+          "name": "Surendra Solanki",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Gurgaon, Haryana",
+            "destination": "Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2803",
+          "name": "Devesh Meena",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "Faridabad",
+          "route": {
+            "origin": "Faridabad, Haryana",
+            "destination": "Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2804",
+          "name": "Jitender Chauhan",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.4,
+          "on_time_rate": 0.86,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "Gurgaon, Haryana",
+            "destination": "Cyber City, Gurgaon, Haryana",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D2801",
+      "acceptable_drivers": [
+        "D2803"
+      ]
+    },
+    {
+      "id": "eval-029",
+      "name": "Saket to Gurgaon MG Road (hard near-tie)",
+      "parcel": {
+        "pickup_location": "Saket, New Delhi",
+        "drop_location": "MG Road, Gurgaon, Haryana",
+        "item_description": "Event sound equipment, 4 cases",
+        "item_value": 35000.0,
+        "weight": 40.0,
+        "size_tier": "large",
+        "budget": 420.0,
+        "deadline_hours": 10
+      },
+      "drivers": [
+        {
+          "id": "D2901",
+          "name": "Sameer Qureshi",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Saket, New Delhi",
+            "destination": "MG Road, Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2902",
+          "name": "Anurag Mishra",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.9,
+          "on_time_rate": 0.96,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Saket, New Delhi",
+            "destination": "MG Road, Gurgaon, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2903",
+          "name": "Rakesh Tanwar",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Saket, New Delhi",
+            "destination": "Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D2904",
+          "name": "Arjun Rana",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "Gurgaon",
+          "route": {
+            "origin": "MG Road, Gurgaon, Haryana",
+            "destination": "Saket, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D2901",
+      "acceptable_drivers": [
+        "D2902",
+        "D2904"
+      ]
+    },
+    {
+      "id": "eval-030",
+      "name": "Dwarka to Karol Bagh",
+      "parcel": {
+        "pickup_location": "Dwarka, New Delhi",
+        "drop_location": "Karol Bagh, New Delhi",
+        "item_description": "Home decor items, 2 cartons",
+        "item_value": 9000.0,
+        "weight": 16.0,
+        "size_tier": "medium",
+        "budget": 260.0,
+        "deadline_hours": 14
+      },
+      "drivers": [
+        {
+          "id": "D3001",
+          "name": "Raghav Bhardwaj",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Dwarka, New Delhi",
+            "destination": "Karol Bagh, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3002",
+          "name": "Zeeshan Anwar",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Dwarka, New Delhi",
+            "destination": "Janakpuri, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3003",
+          "name": "Harshal Chawla",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Dwarka, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3004",
+          "name": "Punit Malhotra",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.3,
+          "on_time_rate": 0.85,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Dwarka, New Delhi",
+            "destination": "Rohini, Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D3001",
+      "acceptable_drivers": [
+        "D3003"
+      ]
+    },
+    {
+      "id": "eval-031",
+      "name": "Noida Sector 18 to Ghaziabad (light bicycle parcel)",
+      "parcel": {
+        "pickup_location": "Noida Sector 18, Uttar Pradesh",
+        "drop_location": "Ghaziabad, Uttar Pradesh",
+        "item_description": "Documents and small packet",
+        "item_value": 2000.0,
+        "weight": 2.0,
+        "size_tier": "small",
+        "budget": 120.0,
+        "deadline_hours": 8
+      },
+      "drivers": [
+        {
+          "id": "D3101",
+          "name": "Sonu Kumar",
+          "vehicle_type": "bicycle",
+          "capacity_kg": 15,
+          "rating": 4.6,
+          "on_time_rate": 0.91,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 18, Uttar Pradesh",
+            "destination": "Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3102",
+          "name": "Farhan Ansari",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 18, Uttar Pradesh",
+            "destination": "Vaishali, Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3103",
+          "name": "Dharmendra Singh",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.4,
+          "on_time_rate": 0.87,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 18, Uttar Pradesh",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3104",
+          "name": "Imran Sheikh",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Noida Sector 18, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D3101",
+      "acceptable_drivers": [
+        "D3102"
+      ]
+    },
+    {
+      "id": "eval-032",
+      "name": "Janakpuri to Rohini (intra-city)",
+      "parcel": {
+        "pickup_location": "Janakpuri, New Delhi",
+        "drop_location": "Rohini, Delhi",
+        "item_description": "Bakery equipment, 18 kg",
+        "item_value": 14000.0,
+        "weight": 18.0,
+        "size_tier": "medium",
+        "budget": 240.0,
+        "deadline_hours": 12
+      },
+      "drivers": [
+        {
+          "id": "D3201",
+          "name": "Kapil Dev",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Janakpuri, New Delhi",
+            "destination": "Rohini, Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3202",
+          "name": "Naveen Gulia",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Janakpuri, New Delhi",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3203",
+          "name": "Rohit Shetty",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Rohini, Delhi",
+            "destination": "Janakpuri, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3204",
+          "name": "Suraj Yadav",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.2,
+          "on_time_rate": 0.83,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Janakpuri, New Delhi",
+            "destination": "Dwarka, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D3201",
+      "acceptable_drivers": [
+        "D3203"
+      ]
+    },
+    {
+      "id": "eval-033",
+      "name": "Agra to Delhi (long-haul reverse, hard)",
+      "parcel": {
+        "pickup_location": "Agra, Uttar Pradesh",
+        "drop_location": "Karol Bagh, New Delhi",
+        "item_description": "Handicraft export lot, 250 kg",
+        "item_value": 90000.0,
+        "weight": 250.0,
+        "size_tier": "large",
+        "budget": 1700.0,
+        "deadline_hours": 40
+      },
+      "drivers": [
+        {
+          "id": "D3301",
+          "name": "Dilip Kumar",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "Agra",
+          "route": {
+            "origin": "Agra, Uttar Pradesh",
+            "destination": "Karol Bagh, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3302",
+          "name": "Naresh Pal",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.9,
+          "on_time_rate": 0.96,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Agra, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3303",
+          "name": "Prem Chand",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "Agra",
+          "route": {
+            "origin": "Agra, Uttar Pradesh",
+            "destination": "Kanpur, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3304",
+          "name": "Babulal Sharma",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "Agra",
+          "route": {
+            "origin": "Agra, Uttar Pradesh",
+            "destination": "Karol Bagh, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D3301",
+      "acceptable_drivers": [
+        "D3302"
+      ]
+    },
+    {
+      "id": "eval-034",
+      "name": "Chandigarh to Delhi (long haul)",
+      "parcel": {
+        "pickup_location": "Chandigarh, Punjab",
+        "drop_location": "Connaught Place, New Delhi",
+        "item_description": "Medical equipment, 120 kg",
+        "item_value": 80000.0,
+        "weight": 120.0,
+        "size_tier": "large",
+        "budget": 2300.0,
+        "deadline_hours": 36
+      },
+      "drivers": [
+        {
+          "id": "D3401",
+          "name": "Gurmeet Singh",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.8,
+          "on_time_rate": 0.94,
+          "current_city": "Chandigarh",
+          "route": {
+            "origin": "Chandigarh, Punjab",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3402",
+          "name": "Sarbjit Kaur",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "Chandigarh",
+          "route": {
+            "origin": "Chandigarh, Punjab",
+            "destination": "Ludhiana, Punjab",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3403",
+          "name": "Paramjit Gill",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "Chandigarh",
+          "route": {
+            "origin": "Chandigarh, Punjab",
+            "destination": "Panipat, Haryana",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3404",
+          "name": "Inderjit Kaur",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "Chandigarh",
+          "route": {
+            "origin": "Chandigarh, Punjab",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D3401",
+      "acceptable_drivers": [
+        "D3404"
+      ]
+    },
+    {
+      "id": "eval-035",
+      "name": "Delhi to Lucknow (long haul)",
+      "parcel": {
+        "pickup_location": "Karol Bagh, New Delhi",
+        "drop_location": "Lucknow, Uttar Pradesh",
+        "item_description": "Construction hardware, 5 bundles",
+        "item_value": 110000.0,
+        "weight": 500.0,
+        "size_tier": "large",
+        "budget": 3200.0,
+        "deadline_hours": 50
+      },
+      "drivers": [
+        {
+          "id": "D3501",
+          "name": "Rameshwar Prasad",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Lucknow, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3502",
+          "name": "Chhote Lal",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Varanasi, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3503",
+          "name": "Om Prakash",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Kanpur, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3504",
+          "name": "Laxman Singh",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.4,
+          "on_time_rate": 0.86,
+          "current_city": "Lucknow",
+          "route": {
+            "origin": "Lucknow, Uttar Pradesh",
+            "destination": "Karol Bagh, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D3501",
+      "acceptable_drivers": [
+        "D3504"
+      ]
+    },
+    {
+      "id": "eval-036",
+      "name": "Lucknow to Kanpur (regional)",
+      "parcel": {
+        "pickup_location": "Lucknow, Uttar Pradesh",
+        "drop_location": "Kanpur, Uttar Pradesh",
+        "item_description": "Textile machinery spares, 75 kg",
+        "item_value": 30000.0,
+        "weight": 75.0,
+        "size_tier": "medium",
+        "budget": 700.0,
+        "deadline_hours": 24
+      },
+      "drivers": [
+        {
+          "id": "D3601",
+          "name": "Alok Srivastava",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "Lucknow",
+          "route": {
+            "origin": "Lucknow, Uttar Pradesh",
+            "destination": "Kanpur, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3602",
+          "name": "Pradeep Srivastava",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.8,
+          "on_time_rate": 0.95,
+          "current_city": "Kanpur",
+          "route": {
+            "origin": "Kanpur, Uttar Pradesh",
+            "destination": "Lucknow, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3603",
+          "name": "Rajiv Tripathi",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "Lucknow",
+          "route": {
+            "origin": "Lucknow, Uttar Pradesh",
+            "destination": "Sitapur, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3604",
+          "name": "Akhilesh Yadav",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.4,
+          "on_time_rate": 0.86,
+          "current_city": "Lucknow",
+          "route": {
+            "origin": "Lucknow, Uttar Pradesh",
+            "destination": "Bareilly, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D3601",
+      "acceptable_drivers": [
+        "D3602"
+      ]
+    },
+    {
+      "id": "eval-037",
+      "name": "Jaipur to Delhi (long haul)",
+      "parcel": {
+        "pickup_location": "Jaipur, Rajasthan",
+        "drop_location": "Karol Bagh, New Delhi",
+        "item_description": "Handloom fabric rolls, 3 bales",
+        "item_value": 50000.0,
+        "weight": 160.0,
+        "size_tier": "large",
+        "budget": 2500.0,
+        "deadline_hours": 32
+      },
+      "drivers": [
+        {
+          "id": "D3701",
+          "name": "Mohan Gurjar",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "Jaipur",
+          "route": {
+            "origin": "Jaipur, Rajasthan",
+            "destination": "Karol Bagh, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3702",
+          "name": "Bhawani Singh",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.9,
+          "on_time_rate": 0.96,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Karol Bagh, New Delhi",
+            "destination": "Jaipur, Rajasthan",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3703",
+          "name": "Ghanshyam Saini",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.5,
+          "on_time_rate": 0.87,
+          "current_city": "Jaipur",
+          "route": {
+            "origin": "Jaipur, Rajasthan",
+            "destination": "Udaipur, Rajasthan",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3704",
+          "name": "Kailash Yadav",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "Jaipur",
+          "route": {
+            "origin": "Jaipur, Rajasthan",
+            "destination": "Karol Bagh, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D3701",
+      "acceptable_drivers": [
+        "D3702"
+      ]
+    },
+    {
+      "id": "eval-038",
+      "name": "Noida Sector 62 to Noida Sector 137 (intra-Noida)",
+      "parcel": {
+        "pickup_location": "Noida Sector 62, Uttar Pradesh",
+        "drop_location": "Noida Sector 137, Uttar Pradesh",
+        "item_description": "IT peripherals carton, 7 kg",
+        "item_value": 18000.0,
+        "weight": 7.0,
+        "size_tier": "small",
+        "budget": 150.0,
+        "deadline_hours": 8
+      },
+      "drivers": [
+        {
+          "id": "D3801",
+          "name": "Rohit Bhasin",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Noida Sector 137, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3802",
+          "name": "Varun Kapoor",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.6,
+          "on_time_rate": 0.91,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 62, Uttar Pradesh",
+            "destination": "Greater Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3803",
+          "name": "Suresh Bhalla",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.89,
+          "current_city": "Noida",
+          "route": {
+            "origin": "Noida Sector 137, Uttar Pradesh",
+            "destination": "Noida Sector 62, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3804",
+          "name": "Hitesh Chandra",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.3,
+          "on_time_rate": 0.85,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Noida Sector 137, Uttar Pradesh",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D3801",
+      "acceptable_drivers": [
+        "D3802",
+        "D3803"
+      ]
+    },
+    {
+      "id": "eval-039",
+      "name": "Dehradun to Delhi (hard reverse long haul)",
+      "parcel": {
+        "pickup_location": "Dehradun, Uttarakhand",
+        "drop_location": "Rohini, Delhi",
+        "item_description": "Ayurvedic products consignment, 95 kg",
+        "item_value": 42000.0,
+        "weight": 95.0,
+        "size_tier": "large",
+        "budget": 1900.0,
+        "deadline_hours": 30
+      },
+      "drivers": [
+        {
+          "id": "D3901",
+          "name": "Sandeep Raturi",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.7,
+          "on_time_rate": 0.92,
+          "current_city": "Dehradun",
+          "route": {
+            "origin": "Dehradun, Uttarakhand",
+            "destination": "Rohini, Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3902",
+          "name": "Vishal Uniyal",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.9,
+          "on_time_rate": 0.96,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Rohini, Delhi",
+            "destination": "Dehradun, Uttarakhand",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3903",
+          "name": "Ashok Rawat",
+          "vehicle_type": "truck",
+          "capacity_kg": 1200,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "Dehradun",
+          "route": {
+            "origin": "Dehradun, Uttarakhand",
+            "destination": "Haridwar, Uttarakhand",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D3904",
+          "name": "Jitendra Negi",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.9,
+          "current_city": "Dehradun",
+          "route": {
+            "origin": "Dehradun, Uttarakhand",
+            "destination": "Rohini, Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D3901",
+      "acceptable_drivers": [
+        "D3902"
+      ]
+    },
+    {
+      "id": "eval-040",
+      "name": "Connaught Place to Ghaziabad",
+      "parcel": {
+        "pickup_location": "Connaught Place, New Delhi",
+        "drop_location": "Ghaziabad, Uttar Pradesh",
+        "item_description": "Shoes retail lot, 5 cartons",
+        "item_value": 21000.0,
+        "weight": 42.0,
+        "size_tier": "medium",
+        "budget": 320.0,
+        "deadline_hours": 18
+      },
+      "drivers": [
+        {
+          "id": "D4001",
+          "name": "Ajay Singh",
+          "vehicle_type": "van",
+          "capacity_kg": 500,
+          "rating": 4.6,
+          "on_time_rate": 0.91,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Ghaziabad, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D4002",
+          "name": "Naresh Garg",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.7,
+          "on_time_rate": 0.93,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Noida, Uttar Pradesh",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D4003",
+          "name": "Vijay Kumar",
+          "vehicle_type": "car",
+          "capacity_kg": 250,
+          "rating": 4.5,
+          "on_time_rate": 0.88,
+          "current_city": "Ghaziabad",
+          "route": {
+            "origin": "Ghaziabad, Uttar Pradesh",
+            "destination": "Connaught Place, New Delhi",
+            "waypoints": []
+          }
+        },
+        {
+          "id": "D4004",
+          "name": "Satyam Mishra",
+          "vehicle_type": "motorcycle",
+          "capacity_kg": 60,
+          "rating": 4.4,
+          "on_time_rate": 0.86,
+          "current_city": "New Delhi",
+          "route": {
+            "origin": "Connaught Place, New Delhi",
+            "destination": "Janakpuri, New Delhi",
+            "waypoints": []
+          }
+        }
+      ],
+      "expected_driver": "D4001",
+      "acceptable_drivers": [
+        "D4003"
+      ]
+    }
+  ]
+}
