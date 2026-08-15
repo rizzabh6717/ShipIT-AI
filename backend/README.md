@@ -217,7 +217,7 @@ Copy `.env.example` → `.env` and adjust. All values have safe defaults so the 
 
 | Variable                  | Default                                              | Purpose                              |
 |---------------------------|------------------------------------------------------|--------------------------------------|
-| `DATABASE_URL`            | `postgresql+asyncpg://postgres:22058@localhost:5432/shipit` | Async Postgres connection       |
+| `DATABASE_URL`            | `postgresql+asyncpg://postgres:*****@localhost:5432/shipit` | Async Postgres connection       |
 | `JWT_SECRET_KEY`          | `change-me-to-a-long-random-secret`                  | **Change in production**             |
 | `ACCESS_TOKEN_EXPIRE_MINUTES` | `60`                                              | JWT lifetime                         |
 | `CORS_ORIGINS`            | `["http://localhost:5173","http://127.0.0.1:5173"]`  | Frontend origins                     |
