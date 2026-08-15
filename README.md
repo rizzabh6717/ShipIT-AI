@@ -1,6 +1,6 @@
 # ShipIT AI — AI-Powered Route Matching Logistics Platform
 
-![ShipIT AI Banner](https://github.com/user-attachments/assets/b3dcb942-7f44-4e4b-86ae-70439577d504)
+<img width="1536" height="1024" alt="shipitai" src="https://github.com/user-attachments/assets/4c50c41a-cdf1-4fa6-8a11-9c44381ef04d" />
 
 **ShipIT AI** is an AI-powered crowdsourced logistics platform that matches senders with drivers who are already traveling along compatible routes. Instead of relying solely on dedicated delivery fleets, drivers publish their routes and available capacity, while senders create parcel requests. The platform uses **semantic route retrieval with pgvector** and **LangChain-powered LLM ranking** to recommend the most suitable drivers for each delivery.
 
