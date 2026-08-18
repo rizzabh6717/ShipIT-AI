@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic import Field
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -50,6 +50,16 @@ class Settings(BaseSettings):
     # AI matching
     ai_match_top_k: int = 10
     ai_match_max_results: int = 5
+
+    @model_validator(mode="after")
+    def _ensure_async_driver(self) -> "Settings":
+        """Render's managed Postgres provides a plain ``postgresql://`` URL;
+        normalize it to the asyncpg driver the async engine requires."""
+        if self.database_url.startswith("postgresql://"):
+            self.database_url = self.database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        elif self.database_url.startswith("postgres://"):
+            self.database_url = self.database_url.replace("postgres://", "postgresql+asyncpg://", 1)
+        return self
 
     @property
     def database_url_sync(self) -> str:

@@ -1,0 +1,83 @@
+# Render Blueprint for ShipIT AI
+# Deploy: Render Dashboard -> New -> Blueprint -> pick rizzabh6717/ShipIT-AI
+# Provisioned: 1 managed Postgres (pgvector) + 2 web services (backend + frontend)
+
+databases:
+  - name: shipit-db
+    plan: free
+    databaseName: shipit
+    user: shipit
+    region: oregon
+
+services:
+  # ---- FastAPI backend ---------------------------------------------------
+  - type: web
+    name: shipit-api
+    runtime: docker
+    repo: https://github.com/rizzabh6717/ShipIT-AI
+    branch: master
+    rootDir: backend
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: shipit-db
+          property: connectionString
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "60"
+      - key: CORS_ORIGINS
+        value: '["https://shipit-app.onrender.com","http://localhost:8080","http://localhost:3000"]'
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: UPLOAD_DIR
+        value: /app/uploads
+      - key: EMBEDDING_PROVIDER
+        value: deterministic
+      - key: EMBEDDING_MODEL
+        value: nvidia/nemotron-3-embed-1b:free
+      - key: EMBEDDING_DIMENSIONS
+        value: "2048"
+      - key: EMBEDDING_BASE_URL
+        value: https://openrouter.ai/api/v1
+      - key: EMBEDDING_API_KEY
+        sync: false
+      - key: LLM_PROVIDER
+        value: heuristic
+      - key: LLM_MODEL
+        value: nvidia/nemotron-3-super-120b-a12b
+      - key: LLM_BASE_URL
+        value: https://openrouter.ai/api/v1
+      - key: LLM_API_KEY
+        sync: false
+      - key: AI_MATCH_TOP_K
+        value: "10"
+      - key: AI_MATCH_MAX_RESULTS
+        value: "5"
+
+  # ---- TanStack Start SSR frontend ---------------------------------------
+  - type: web
+    name: shipit-app
+    runtime: docker
+    repo: https://github.com/rizzabh6717/ShipIT-AI
+    branch: master
+    rootDir: frontend
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
+    plan: free
+    region: oregon
+    healthCheckPath: /
+    envVars:
+      # Injected as a Docker build arg by Render, baked into the client
+      # bundle at build time (must match the backend service URL).
+      - key: VITE_API_URL
+        value: https://shipit-api.onrender.com/api

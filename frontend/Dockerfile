@@ -15,9 +15,11 @@ ENV VITE_API_URL=$VITE_API_URL NITRO_PRESET=node-server
 RUN npm run build
 
 # --- Runtime stage ---------------------------------------------------------
+# Do NOT pin NITRO_PORT: the server listens on $PORT (Render) and falls back
+# to 3000 locally. Nitro precedence: NITRO_PORT ?? PORT ?? 3000.
 FROM node:22-alpine AS runtime
 WORKDIR /app
-ENV NITRO_HOST=0.0.0.0 NITRO_PORT=3000
+ENV NITRO_HOST=0.0.0.0
 COPY --from=build /app/.output ./.output
 EXPOSE 3000
 CMD ["node", ".output/server/index.mjs"]
