@@ -46,7 +46,9 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
-    allow_credentials=True,
+    # Bearer-token auth (no cookies): keep credentials off so the wildcard
+    # origin works and CORS survives any frontend URL/rename on Render.
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

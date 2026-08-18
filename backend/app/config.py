@@ -21,8 +21,9 @@ class Settings(BaseSettings):
         validation_alias="DATABASE_URL",
     )
 
-    # CORS - include frontend origins
-    cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:8080", "http://127.0.0.1:8080"]
+    # CORS - allow all origins (token-based auth, no cookies). Set CORS_ORIGINS
+    # to a JSON list if you want to restrict to specific frontends.
+    cors_origins: list[str] = ["*"]
 
     # JWT
     jwt_secret_key: str = "change-me-to-a-long-random-secret"
