@@ -35,7 +35,11 @@ def run_migrations_offline() -> None:
 
 def run_migrations_online() -> None:
     """Run migrations against the database using a synchronous engine."""
-    connectable = create_engine(settings.database_url_sync, pool_pre_ping=True)
+    connectable = create_engine(
+        settings.database_url_sync,
+        pool_pre_ping=True,
+        connect_args={"connect_timeout": 5},
+    )
     with connectable.connect() as connection:
         context.configure(
             connection=connection,
