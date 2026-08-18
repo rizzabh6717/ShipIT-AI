@@ -12,7 +12,7 @@ databases:
 services:
   # ---- FastAPI backend ---------------------------------------------------
   - type: web
-    name: shipit-api
+    name: shipit-ai
     runtime: docker
     repo: https://github.com/rizzabh6717/ShipIT-AI
     branch: master
@@ -80,4 +80,4 @@ services:
       # Injected as a Docker build arg by Render, baked into the client
       # bundle at build time (must match the backend service URL).
       - key: VITE_API_URL
-        value: https://shipit-api.onrender.com/api
+        value: https://shipit-ai.onrender.com/api
