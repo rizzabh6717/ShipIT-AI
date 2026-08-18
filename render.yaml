@@ -34,7 +34,7 @@ services:
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: "60"
       - key: CORS_ORIGINS
-        value: '["*"]'
+        value: '["https://shipit-app.onrender.com"]'
       - key: APP_ENV
         value: production
       - key: DEBUG

@@ -21,9 +21,9 @@ class Settings(BaseSettings):
         validation_alias="DATABASE_URL",
     )
 
-    # CORS - allow all origins (token-based auth, no cookies). Set CORS_ORIGINS
-    # to a JSON list if you want to restrict to specific frontends.
-    cors_origins: list[str] = ["*"]
+    # CORS - only the production frontend may call this API. Override
+    # CORS_ORIGINS (JSON list) to add local dev origins if needed.
+    cors_origins: list[str] = ["https://shipit-app.onrender.com"]
 
     # JWT
     jwt_secret_key: str = "change-me-to-a-long-random-secret"
