@@ -17,8 +17,8 @@ services:
     repo: https://github.com/rizzabh6717/ShipIT-AI
     branch: master
     rootDir: backend
-    dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     plan: free
     region: oregon
     healthCheckPath: /health
@@ -71,8 +71,8 @@ services:
     repo: https://github.com/rizzabh6717/ShipIT-AI
     branch: master
     rootDir: frontend
-    dockerfilePath: ./frontend/Dockerfile
-    dockerContext: ./frontend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     plan: free
     region: oregon
     healthCheckPath: /
